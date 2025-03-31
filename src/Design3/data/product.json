@@ -1,0 +1,111 @@
+{
+    "categories": [
+      {
+        "id": "cables",
+        "name": "Cables",
+        "description": "High-quality electrical cables for various applications",
+        "image": "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "wires",
+        "name": "Wires",
+        "description": "Premium wires for residential and industrial use",
+        "image": "https://images.unsplash.com/photo-1601814933824-fd0b574dd592?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "switches",
+        "name": "Switches",
+        "description": "Modern switches with advanced features",
+        "image": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=1200&q=80"
+      },
+      {
+        "id": "lighting",
+        "name": "Lighting",
+        "description": "Energy-efficient lighting solutions",
+        "image": "https://images.unsplash.com/photo-1565193298433-f6b5c50e4561?auto=format&fit=crop&w=1200&q=80"
+      }
+    ],
+    "products": [
+      {
+        "id": "premium-cable-1",
+        "categoryId": "cables",
+        "name": "Premium Industrial Cable",
+        "description": "High-performance cable designed for industrial applications with superior durability",
+        "longDescription": "Our Premium Industrial Cable is engineered to meet the most demanding industrial requirements. Features include enhanced insulation, superior conductivity, and exceptional durability in harsh environments. Ideal for manufacturing facilities, power plants, and heavy machinery installations.",
+        "specifications": {
+          "material": "Copper",
+          "length": "100m",
+          "rating": "600V",
+          "temperature": "-40°C to +105°C"
+        },
+        "price": 299.99,
+        "image": "https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?auto=format&fit=crop&w=1200&q=80",
+        "features": [
+          "High conductivity copper core",
+          "Double insulation layer",
+          "UV resistant outer jacket",
+          "Flame retardant"
+        ]
+      },
+      {
+        "id": "smart-switch-1",
+        "categoryId": "switches",
+        "name": "Smart Touch Switch",
+        "description": "Modern touch-sensitive switch with WiFi connectivity",
+        "longDescription": "Experience the future of home control with our Smart Touch Switch. This elegant device combines sophisticated touch controls with smart home integration, allowing you to manage your lighting through voice commands or your smartphone. Features include customizable LED indicators, scheduling, and energy monitoring.",
+        "specifications": {
+          "voltage": "220V",
+          "wireless": "WiFi 2.4GHz",
+          "compatibility": "Alexa, Google Home",
+          "finish": "Glass Touch Panel"
+        },
+        "price": 49.99,
+        "image": "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?auto=format&fit=crop&w=1200&q=80",
+        "features": [
+          "Touch-sensitive panel",
+          "WiFi connectivity",
+          "Voice control support",
+          "Energy monitoring"
+        ]
+      },
+      {
+        "id": "led-panel-1",
+        "categoryId": "lighting",
+        "name": "LED Panel Light",
+        "description": "Energy-efficient LED panel with adjustable brightness",
+        "longDescription": "Transform your space with our premium LED Panel Light. This ultra-thin panel delivers uniform, flicker-free illumination while consuming minimal energy. Perfect for offices, homes, and commercial spaces, it features adjustable brightness levels and can be surface-mounted or recessed.",
+        "specifications": {
+          "wattage": "40W",
+          "lumens": "4000lm",
+          "color": "4000K",
+          "lifespan": "50000 hours"
+        },
+        "price": 79.99,
+        "image": "https://images.unsplash.com/photo-1565193298433-f6b5c50e4561?auto=format&fit=crop&w=1200&q=80",
+        "features": [
+          "Dimmable",
+          "Uniform light distribution",
+          "Easy installation",
+          "Energy efficient"
+        ]
+      }
+    ],
+    "faq": [
+      {
+        "question": "What types of cables do you offer?",
+        "answer": "We offer a wide range of cables including power cables, control cables, instrumentation cables, and specialty cables for various industrial and commercial applications."
+      },
+      {
+        "question": "Are your products certified?",
+        "answer": "Yes, all our products are certified by relevant authorities and comply with international safety standards including ISO, CE, and UL certifications."
+      },
+      {
+        "question": "What is your warranty policy?",
+        "answer": "We offer comprehensive warranties ranging from 2-5 years depending on the product category. Specific warranty information is provided with each product."
+      },
+      {
+        "question": "Do you offer custom solutions?",
+        "answer": "Yes, we provide customized solutions for specific requirements. Contact our technical team for detailed discussions about your needs."
+      }
+    ]
+  }
