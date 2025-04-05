@@ -1,0 +1,229 @@
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+
+const classes = [7, 8, 9, 10, 11, 12]
+const subjects = {
+  physics: {
+    name: "Physics",
+    questions: [
+      {
+        id: 1,
+        question: "What is the SI unit of force?",
+        options: ["Newton", "Joule", "Watt", "Pascal"],
+        correctAnswer: "Newton"
+      },
+      {
+        id: 2,
+        question: "Which law states that 'For every action, there is an equal and opposite reaction'?",
+        options: ["First Law", "Second Law", "Third Law", "Fourth Law"],
+        correctAnswer: "Third Law"
+      },
+      {
+        id: 3,
+        question: "What is the speed of light in vacuum?",
+        options: ["299,792 km/s", "300,000 km/s", "199,792 km/s", "250,000 km/s"],
+        correctAnswer: "299,792 km/s"
+      }
+    ]
+  },
+  chemistry: {
+    name: "Chemistry",
+    questions: [
+      {
+        id: 1,
+        question: "What is the atomic number of Carbon?",
+        options: ["5", "6", "7", "8"],
+        correctAnswer: "6"
+      },
+      {
+        id: 2,
+        question: "What is the chemical formula for water?",
+        options: ["H2O", "CO2", "NaCl", "O2"],
+        correctAnswer: "H2O"
+      },
+      {
+        id: 3,
+        question: "Which gas is known as laughing gas?",
+        options: ["NO", "NO2", "N2O", "N2O5"],
+        correctAnswer: "N2O"
+      }
+    ]
+  }
+}
+
+function Quiz() {
+  const [selectedClass, setSelectedClass] = useState(null)
+  const [selectedSubject, setSelectedSubject] = useState(null)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [score, setScore] = useState(0)
+  const [showScore, setShowScore] = useState(false)
+  const [selectedAnswer, setSelectedAnswer] = useState(null)
+  const [isAnswered, setIsAnswered] = useState(false)
+  const [quizStarted, setQuizStarted] = useState(false)
+
+  const handleClassSelect = (classNum) => {
+    setSelectedClass(classNum)
+  }
+
+  const handleSubjectSelect = (subject) => {
+    setSelectedSubject(subject)
+    setQuizStarted(true)
+  }
+
+  const handleAnswerClick = (answer) => {
+    if (isAnswered) return
+    
+    setSelectedAnswer(answer)
+    setIsAnswered(true)
+
+    if (answer === subjects[selectedSubject].questions[currentQuestion].correctAnswer) {
+      setScore(score + 1)
+    }
+
+    setTimeout(() => {
+      if (currentQuestion === subjects[selectedSubject].questions.length - 1) {
+        setShowScore(true)
+      } else {
+        setCurrentQuestion(currentQuestion + 1)
+        setSelectedAnswer(null)
+        setIsAnswered(false)
+      }
+    }, 1000)
+  }
+
+  const resetQuiz = () => {
+    setSelectedClass(null)
+    setSelectedSubject(null)
+    setCurrentQuestion(0)
+    setScore(0)
+    setShowScore(false)
+    setSelectedAnswer(null)
+    setIsAnswered(false)
+    setQuizStarted(false)
+  }
+
+  const getOptionClassName = (option) => {
+    if (!isAnswered) return "bg-white dark:bg-gray-800"
+    if (option === subjects[selectedSubject].questions[currentQuestion].correctAnswer) {
+      return "bg-green-500 text-white"
+    }
+    if (option === selectedAnswer && option !== subjects[selectedSubject].questions[currentQuestion].correctAnswer) {
+      return "bg-red-500 text-white"
+    }
+    return "bg-white dark:bg-gray-800"
+  }
+
+  if (!selectedClass) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">Select Your Class</h1>
+        <div className="max-w-2xl mx-auto grid grid-cols-2 md:grid-cols-3 gap-4">
+          {classes.map((classNum) => (
+            <motion.button
+              key={classNum}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleClassSelect(classNum)}
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center hover:bg-primary hover:text-white transition-colors duration-300"
+            >
+              Class {classNum}
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (!selectedSubject) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">Select Subject for Class {selectedClass}</h1>
+        <div className="max-w-2xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+          {Object.entries(subjects).map(([key, subject]) => (
+            <motion.button
+              key={key}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={() => handleSubjectSelect(key)}
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg text-center hover:bg-primary hover:text-white transition-colors duration-300"
+            >
+              {subject.name}
+            </motion.button>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold mb-8 text-center">
+        {subjects[selectedSubject].name} Quiz - Class {selectedClass}
+      </h1>
+      
+      <div className="max-w-2xl mx-auto">
+        {showScore ? (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center"
+          >
+            <h2 className="text-3xl font-bold mb-4">Quiz Complete!</h2>
+            <p className="text-xl mb-6">
+              Your score: {score} out of {subjects[selectedSubject].questions.length}
+            </p>
+            <div className="text-lg mb-4">
+              Percentage: {((score / subjects[selectedSubject].questions.length) * 100).toFixed(0)}%
+            </div>
+            <button
+              onClick={resetQuiz}
+              className="bg-primary hover:bg-secondary text-white font-bold py-3 px-8 rounded-lg transition-colors duration-300"
+            >
+              Try Another Quiz
+            </button>
+          </motion.div>
+        ) : (
+          <motion.div 
+            key={currentQuestion}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6"
+          >
+            <div className="mb-6">
+              <div className="flex justify-between items-center mb-4">
+                <span className="text-sm font-semibold">
+                  Question {currentQuestion + 1} of {subjects[selectedSubject].questions.length}
+                </span>
+                <span className="text-sm font-semibold">
+                  Score: {score}
+                </span>
+              </div>
+              <h2 className="text-xl font-semibold mb-4">
+                {subjects[selectedSubject].questions[currentQuestion].question}
+              </h2>
+            </div>
+            
+            <div className="space-y-4">
+              {subjects[selectedSubject].questions[currentQuestion].options.map((option, index) => (
+                <button
+                  key={index}
+                  onClick={() => handleAnswerClick(option)}
+                  disabled={isAnswered}
+                  className={`w-full text-left p-4 rounded-lg border transition-colors duration-300 ${
+                    getOptionClassName(option)
+                  } ${
+                    !isAnswered ? 'hover:bg-gray-100 dark:hover:bg-gray-700' : ''
+                  }`}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default Quiz
